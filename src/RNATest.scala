@@ -3,7 +3,7 @@
   */
 object RNATest extends App {
 
-  val rna = RNA1.fromSeq(Seq(C, A, A, U, G, C))
+  val rna = RNA.fromSeq(Seq(C, A, A, U, G, C))
 
   val tri = rna(4)
   println(tri)
