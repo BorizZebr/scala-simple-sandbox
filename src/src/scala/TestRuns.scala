@@ -1,3 +1,5 @@
+package src.scala
+
 /**
   * Created by bbondarenko on 3/27/2016.
   */

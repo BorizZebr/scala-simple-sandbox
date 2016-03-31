@@ -1,4 +1,7 @@
-import TestRuns.time
+package src.scala.scalaproblems
+
+import src.scala.TestRuns
+import TestRuns._
 
 /**
   * Created by borisbondarenko on 26.03.16.

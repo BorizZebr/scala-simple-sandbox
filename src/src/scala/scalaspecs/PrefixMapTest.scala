@@ -1,3 +1,5 @@
+package src.scala.scalaspecs
+
 /**
   * Created by borisbondarenko on 29.03.16.
   */

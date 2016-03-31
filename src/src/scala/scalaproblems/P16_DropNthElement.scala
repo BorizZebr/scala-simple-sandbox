@@ -1,4 +1,7 @@
-import TestRuns.{testIntList, time}
+package src.scala.scalaproblems
+
+import src.scala.TestRuns
+import TestRuns._
 
 /**
   * Created by bbondarenko on 3/27/2016.

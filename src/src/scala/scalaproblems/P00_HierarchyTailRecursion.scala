@@ -1,3 +1,5 @@
+package src.scala.scalaproblems
+
 /**
   * Created by borisbondarenko on 29.03.16.
   */
@@ -5,7 +7,7 @@ object P00_HierarchyTailRecursion extends App {
 
   case class Hierarchy(info: String, children: List[Hierarchy] = Nil) {
 
-    override def toString: String ={
+    override def toString: String = {
 
       def _toStrLevel(str: String, l: Int) = "|--\t" * l + str
 

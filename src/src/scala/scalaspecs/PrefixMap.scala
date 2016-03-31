@@ -1,3 +1,5 @@
+package src.scala.scalaspecs
+
 import scala.collection.mutable
 import scala.collection.immutable
 import scala.collection.mutable.{ListBuffer, Builder, MapBuilder}

@@ -1,3 +1,5 @@
+package src.scala.scalaspecs
+
 import scala.collection.mutable.{ArrayBuffer, Builder}
 import scala.collection.IndexedSeqLike
 import scala.collection.generic.CanBuildFrom
@@ -29,7 +31,7 @@ final class RNA private (val groups: Array[Int], val length: Int)
     Base.fromInt(groups(idx / N) >> (idx % N * S) & M)
   }
 
-  // Optional re-implementation of foreach, 
+  // Optional re-implementation of foreach,
   // to make it more efficient.
   override def foreach[U](f: Base => U): Unit = {
     var i = 0
@@ -42,6 +44,10 @@ final class RNA private (val groups: Array[Int], val length: Int)
   }
 }
 
+
+/**
+  * Created by borisbondarenko on 31.03.16.
+  */
 object RNA {
 
   private val S = 2            // number of bits in group

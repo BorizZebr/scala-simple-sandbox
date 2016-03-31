@@ -1,4 +1,4 @@
-import scala.annotation.tailrec
+package src.scala.scalaproblems
 
 /**
   * Created by borisbondarenko on 27.03.16.

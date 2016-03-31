@@ -1,3 +1,5 @@
+package src.scala.scalaproblems
+
 /**
   * Created by borisbondarenko on 26.03.16.
   */
