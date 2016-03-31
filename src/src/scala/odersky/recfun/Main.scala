@@ -23,10 +23,28 @@ object Main {
   /**
    * Exercise 2
    */
-  def balance(chars: List[Char]): Boolean = false
+  def balance(chars: List[Char]): Boolean = {
+
+    def loop(co: Int, ls: List[Char]): Boolean = (co, ls) match {
+
+      case (c, Nil) => c == 0
+      case (0, ')' :: _) => false
+      case (c, ')' :: t) => loop(c - 1, t)
+      case (c, '(' :: t) => loop(c + 1, t)
+      case (c, _ :: t) => loop(c, t)
+    }
+
+    loop(0, chars)
+  }
 
   /**
    * Exercise 3
    */
-  def countChange(money: Int, coins: List[Int]): Int = 0
+  def countChange(money: Int, coins: List[Int]): Int = (money, coins) match {
+
+    case (0, _) => 1
+    case (m, Nil) => 0
+    case (m, _) if m < 0 => 0
+    case (m, h :: t) => countChange(m - h, h :: t) + countChange(m, t)
+  }
 }
