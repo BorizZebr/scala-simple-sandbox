@@ -8,7 +8,7 @@ import org.scalatest.junit.JUnitRunner
 @RunWith(classOf[JUnitRunner])
 class BalanceSuite extends FunSuite {
 
-  import odersky.recfun.Main._
+  import odersky.recfun.Main_1._
 
   test("balance: '(if (zero? x) max (/ 1 x))' is balanced") {
     assert(balance("(if (zero? x) max (/ 1 x))".toList))

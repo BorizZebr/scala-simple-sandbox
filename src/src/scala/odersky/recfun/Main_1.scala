@@ -1,6 +1,6 @@
 package scala.odersky.recfun
 
-object Main {
+object Main_1 {
 
   def main(args: Array[String]) {
     println("Pascal's Triangle")
@@ -43,7 +43,7 @@ object Main {
   def countChange(money: Int, coins: List[Int]): Int = (money, coins) match {
 
     case (0, _) => 1
-    case (m, Nil) => 0
+    case (_, Nil) => 0
     case (m, _) if m < 0 => 0
     case (m, h :: t) => countChange(m - h, h :: t) + countChange(m, t)
   }

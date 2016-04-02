@@ -8,7 +8,7 @@ import org.scalatest.junit.JUnitRunner
 @RunWith(classOf[JUnitRunner])
 class CountChangeSuite extends FunSuite {
 
-  import odersky.recfun.Main._
+  import odersky.recfun.Main_1._
 
   test("countChange: example given in instructions") {
     assert(countChange(4,List(1,2)) === 3)
