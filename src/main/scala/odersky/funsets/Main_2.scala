@@ -1,4 +1,4 @@
-package scala.odersky.funsets
+package odersky.funsets
 
 object Main_2 extends App {
   import FunSets._

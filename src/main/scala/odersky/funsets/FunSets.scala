@@ -1,4 +1,4 @@
-package scala.odersky.funsets
+package odersky.funsets
 
 /**
  * 2. Purely Functional Sets.

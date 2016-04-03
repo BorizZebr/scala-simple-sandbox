@@ -8,7 +8,7 @@ import org.scalatest.junit.JUnitRunner
 @RunWith(classOf[JUnitRunner])
 class PascalSuite extends FunSuite {
 
-  import scala.odersky.recfun.Main_1._
+  import odersky.recfun.Main_1._
 
   test("pascal: col=0,row=2") {
     assert(pascal(0,2) === 1)

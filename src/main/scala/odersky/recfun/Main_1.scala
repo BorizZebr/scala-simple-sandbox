@@ -1,4 +1,4 @@
-package scala.odersky.recfun
+package odersky.recfun
 
 object Main_1 {
 
