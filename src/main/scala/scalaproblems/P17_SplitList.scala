@@ -1,9 +1,10 @@
 package src.scala.scalaproblems
 
-import src.scala.TestRuns
+import scalaproblems.TestRuns
 import TestRuns._
 
 import scala.annotation.tailrec
+import scalaproblems.TestRuns
 
 /**
   * Created by bbondarenko on 3/27/2016.

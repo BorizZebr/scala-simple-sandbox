@@ -1,6 +1,5 @@
-package src.scala.scalaproblems
+package scalaproblems
 
-import src.scala.TestRuns
 import TestRuns._
 
 /**

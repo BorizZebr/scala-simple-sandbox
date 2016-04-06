@@ -1,6 +1,7 @@
 package scala.scalaproblems
 
-import src.scala.TestRuns.time
+import scalaproblems.TestRuns
+import TestRuns.time
 
 /**
   * Created by bbondarenko on 3/27/2016.

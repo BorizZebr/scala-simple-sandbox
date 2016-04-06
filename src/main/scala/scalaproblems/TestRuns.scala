@@ -1,4 +1,4 @@
-package src.scala
+package scalaproblems
 
 /**
   * Created by bbondarenko on 3/27/2016.
@@ -30,4 +30,6 @@ object TestRuns {
   val testCharList = List('a, 'a, 'b, 'b, 'b, 'b, 'b, 'c, 'd, 'd, 'd, 'e)
 
   val testSimpleList = List('a, 'b, 'a, 'a, 'c)
+
+  val names = List("AAaaa", "Bbbbb", "Cccc", "Dddddd", "Eeeee", "Fffff", "Gggg", "Hhhhh", "Kkkkk", "LLLLlll")
 }

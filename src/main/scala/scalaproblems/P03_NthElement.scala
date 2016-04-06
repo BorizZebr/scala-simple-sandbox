@@ -1,7 +1,9 @@
 package src.scala.scalaproblems
 
-import src.scala.TestRuns
+import scalaproblems.TestRuns
 import TestRuns._
+
+import scalaproblems.TestRuns
 
 /**
   * Created by borisbondarenko on 26.03.16.
