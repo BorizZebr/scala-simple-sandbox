@@ -77,7 +77,24 @@ object Huffman {
    *       println("integer is  : "+ theInt)
    *   }
    */
-  def times(chars: List[Char]): List[(Char, Int)] = ???
+  def times(chars: List[Char]): List[(Char, Int)] = {
+    val a = chars.sorted(Ordering[Char].reverse).
+      groupBy(c => c)
+
+    a.map(c => c._1 -> c._2.length).toList
+  }
+  //{
+//
+//    def loop(acc: List[(Char, Int)], rest: List[Char]): List[(Char, Int)] = rest match {
+//
+//      case Nil => acc
+//      case h :: _ =>
+//        val spaned = rest.span{h==}
+//        loop((spaned._1.head, spaned._1.length) :: acc, spaned._2)
+//    }
+//
+//    loop(Nil, chars.sorted(Ordering[Char].reverse))
+//  }
 
   /**
    * Returns a list of `Leaf` nodes for a given frequency table `freqs`.

@@ -26,6 +26,11 @@ class HuffmanSuite extends FunSuite {
     }
   }
 
+  test("times function returns correct result") {
+
+    assert(times(List('a', 'a', 'b', 'a', 'b', 'c')) === List(('a', 3), ('b', 2), ('c', 1)))
+  }
+
   test("string2chars(\"hello, world\")") {
     assert(string2Chars("hello, world") === List('h', 'e', 'l', 'l', 'o', ',', ' ', 'w', 'o', 'r', 'l', 'd'))
   }
