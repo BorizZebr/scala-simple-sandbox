@@ -77,13 +77,12 @@ object Huffman {
    *       println("integer is  : "+ theInt)
    *   }
    */
-  def times(chars: List[Char]): List[(Char, Int)] = {
-    val a = chars.sorted(Ordering[Char].reverse).
-      groupBy(c => c)
+  def times(chars: List[Char]): List[(Char, Int)] =
+    chars.sorted(Ordering[Char].reverse).
+      groupBy(c => c).
+      mapValues(_.length).toList
 
-    a.map(c => c._1 -> c._2.length).toList
-  }
-  //{
+//  {
 //
 //    def loop(acc: List[(Char, Int)], rest: List[Char]): List[(Char, Int)] = rest match {
 //
