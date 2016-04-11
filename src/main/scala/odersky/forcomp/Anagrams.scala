@@ -1,5 +1,8 @@
 package odersky.forcomp
 
+import scala.collection.mutable
+import scala.collection.mutable.HashMap
+
 object Anagrams {
 
   /** A word is simply a `String`. */
@@ -148,15 +151,23 @@ object Anagrams {
     */
   def sentenceAnagrams(sentence: Sentence): List[Sentence] = {
     def loop(occ: Occurrences): List[Sentence] = {
-
-      if (occ.isEmpty) List(Nil)
-      else for {
-        i <- combinations(occ)
-        j <- dictionaryByOccurrences getOrElse(i, Nil)
-        k <- loop(subtract(occ, i))
-      } yield j :: k
+      anagrams.get(occ) match {
+        case Some(x) => x
+        case None =>
+          if (occ.isEmpty) List(Nil)
+          else {
+            val a = for {
+              i <- combinations(occ)
+              j <- dictionaryByOccurrences getOrElse (i, Nil)
+              k <- loop(subtract(occ, i))
+            } yield j :: k
+            anagrams.put(occ, a)
+            a
+          }
+      }
     }
-
     loop(sentenceOccurrences(sentence))
   }
+
+  val anagrams = mutable.HashMap[Occurrences, List[Sentence]]()
 }
