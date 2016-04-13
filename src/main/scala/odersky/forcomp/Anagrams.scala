@@ -1,7 +1,6 @@
 package odersky.forcomp
 
 import scala.collection.mutable
-import scala.collection.mutable.HashMap
 
 object Anagrams {
 
