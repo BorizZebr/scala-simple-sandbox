@@ -20,7 +20,7 @@ object TestRuns {
     }
     val t1 = System.nanoTime()
 
-    println("%s: Elapsed time is %s ms".format(msg, (t1 - t0) / n / 1000000.0))
+    println("\n%s: Elapsed time is %s ms".format(msg, (t1 - t0) / n / 1000000.0))
     println("Result: %s".format(res))
     res
   }
