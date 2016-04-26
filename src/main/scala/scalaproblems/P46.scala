@@ -27,21 +27,17 @@ object P46 extends App {
   }
 
   def gray(c: Int): List[String] = {
-    val digits = Set(0, 1)
-
-    def loop(rest: Int) : List[List[Int]] = {
-      if (rest == 1) List(List(0), List(1))
-      else for {
-        l <- loop(rest - 1)
-        n <- digits
-      } yield n :: l
+    def loop(acc: List[String], rest: Int) : List[String] = {
+      val nAcc = acc.map { "0" + _ } ::: acc.reverse.map { "1" + _ }
+      if(rest == 1) nAcc
+      else loop(nAcc, rest - 1)
     }
 
-    loop(c) map { _.reverse.mkString }
+    loop(List(""), c)
   }
 
 
   table2((a: Boolean, b: Boolean) => a and (a or not(b)))
 
-  println(gray(5))
+  println(gray(400))
 }
