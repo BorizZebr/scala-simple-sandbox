@@ -1,5 +1,7 @@
 package scalaproblems
 
+import odersky.patmat.Huffman._
+
 /**
   * Created by borisbondarenko on 25.04.16.
   */
@@ -36,8 +38,10 @@ object P46 extends App {
     loop(List(""), c)
   }
 
-
   table2((a: Boolean, b: Boolean) => a and (a or not(b)))
 
-  println(gray(400))
+  println(gray(3))
+
+  val ct = createCodeTree(List(('a', 45), ('b', 13), ('c', 12), ('d', 16), ('e', 9), ('f', 5)))
+  println(toList(ct))
 }
