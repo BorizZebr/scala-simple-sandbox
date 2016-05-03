@@ -5,7 +5,7 @@ import odersky.patmat.Huffman._
 /**
   * Created by borisbondarenko on 25.04.16.
   */
-object P46 extends App {
+object P46_50_Logic extends App {
 
   implicit class BoolOps(a: Boolean) {
     def and (b: Boolean) = a && b
