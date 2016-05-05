@@ -5,7 +5,7 @@ import java.lang.Math.log
 /**
   * Created by borisbondarenko on 03.05.16.
   */
-object P55_BinTrees extends App {
+object P55_63_BinTrees extends App {
 
   sealed abstract class Tree[+T] {
     def addValue[U >: T](x: U)(implicit ord: U => Ordered[U]): Tree[U]
@@ -123,10 +123,12 @@ object P55_BinTrees extends App {
         tree <- hBalancedWithHeight(h, value).filter(_.count == nodes)
       } yield tree).toList
 
-    def completeBinaryTree[T](nodes: Int, value: T): Tree[T] = nodes match {
-      case 0 => End
-      case 1 => Node(value)
-      case n => Node(value, completeBinaryTree(nodes/2, value), completeBinaryTree((nodes - 1)/2, value))
+    def completeBinaryTree[T](nodes: Int, value: T): Tree[T] = {
+      def loop(addr: Int): Tree[T] =
+        if (addr > nodes) End
+        else Node(value, loop(addr * 2), loop(addr * 2 + 1))
+
+      loop(1)
     }
 
   }
