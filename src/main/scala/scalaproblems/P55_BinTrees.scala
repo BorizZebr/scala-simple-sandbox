@@ -58,10 +58,28 @@ object P55_BinTrees extends App {
         val a = cBalanced(n / 2, el)
         a.flatMap(l => a.map(r => Node(el, l, r)))
     }
+
+    def symmetricBalancedTrees[T](count: Int, el: T): List[Tree[T]] =
+      cBalanced(count, el) filter { _.isSymmetric }
+
+    def fromList[T](list: List[T])(implicit ord: T => Ordered[T]): Tree[T] =
+      list.foldLeft(End: Tree[T]) { (a, b) => a.addValue(b) }
+
+    def minHBalNodes(height: Int): Int = height match {
+      case h if h <= 0 => 0
+      case 1           => 1
+      case h           => 1 + minHBalNodes(h - 1) + minHBalNodes(h - 2)
+    }
+
+    
   }
 
 
   println(Tree.cBalanced(4, "x"))
 
   println(Node("a", Node("b"), Node("c")).isSymmetric)
+
+  println(End.addValue("a"))
+
+  println(Tree.fromList(List(3, 2, 1, 5, 8, 2, 10)))
 }
