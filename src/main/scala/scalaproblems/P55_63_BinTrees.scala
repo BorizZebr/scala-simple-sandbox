@@ -16,6 +16,8 @@ object P55_63_BinTrees extends App {
     def leafList: List[T]
     def internalList: List[T]
     def atLevel(level: Int): List[T]
+    def layoutBinaryTree: Tree[T] = layoutBinaryTreeInner(1, 1)._1
+    protected def layoutBinaryTreeInner(x: Int, y: Int): (Tree[T], Int)
   }
 
   case object End extends Tree[Nothing] {
@@ -28,6 +30,7 @@ object P55_63_BinTrees extends App {
     override def leafList: List[Nothing] = Nil
     override def internalList: List[Nothing] = Nil
     override def atLevel(level: Int): List[Nothing] = Nil
+    override protected def layoutBinaryTreeInner(x: Int, y: Int): (Tree[Nothing], Int) = (End, x)
   }
 
   case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
@@ -67,6 +70,21 @@ object P55_63_BinTrees extends App {
       case 1 => List(value)
       case n => left.atLevel(n - 1) ::: right.atLevel(n - 1)
     }
+
+    override protected def layoutBinaryTreeInner(x: Int, y: Int): (Tree[T], Int) = {
+      val (l, xl) = left.layoutBinaryTreeInner(x, y + 1)
+      val (r, xr) = right.layoutBinaryTreeInner(xl + 1, y + 1)
+      (PositionedNode(value, l, r, xl, y), xr)
+    }
+  }
+
+  case class PositionedNode[+T](
+                                 override val value: T,
+                                 override val left: Tree[T],
+                                 override val right: Tree[T],
+                                 x: Int,
+                                 y: Int) extends Node[T](value, left, right) {
+    override def toString = "T[" + x.toString + "," + y.toString + "](" + value.toString + " " + left.toString + " " + right.toString + ")"
   }
 
   object Node {
@@ -130,7 +148,6 @@ object P55_63_BinTrees extends App {
 
       loop(1)
     }
-
   }
 
 
