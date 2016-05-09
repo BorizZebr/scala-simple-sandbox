@@ -16,13 +16,17 @@ object P55_63_BinTrees extends App {
     def leafList: List[T]
     def internalList: List[T]
     def atLevel(level: Int): List[T]
+    val depth: Int
+    val leftDepth: Int
 
     def layoutBinaryTree: Tree[T] = layoutBinaryTreeInner(1, 1)._1
     def layoutBinaryTreeInner(x: Int, y: Int): (Tree[T], Int)
 
     def layoutBinaryTree2: Tree[T] = {
-
+      val x0 = (leftDepth to 2).map(i => Math.pow(2, depth - i).toInt).sum + 1
+      layoutBinaryTree2Inner(x0, 1, depth - 2)
     }
+    def layoutBinaryTree2Inner(x: Int, y: Int, d: Int): Tree[T]
   }
 
   object End extends Tree[Nothing] {
@@ -36,6 +40,9 @@ object P55_63_BinTrees extends App {
     override def internalList: List[Nothing] = Nil
     override def atLevel(level: Int): List[Nothing] = Nil
     override def layoutBinaryTreeInner(x: Int, y: Int): (Tree[Nothing], Int) = (End, x)
+    override val depth: Int = 0
+    override val leftDepth: Int = 0
+    override def layoutBinaryTree2Inner(x: Int, y: Int, d: Int): Tree[Nothing] = End
   }
 
   class Node[+T](val value: T, val left: Tree[T], val right: Tree[T]) extends Tree[T] {
@@ -81,6 +88,18 @@ object P55_63_BinTrees extends App {
       val (r, xr) = right.layoutBinaryTreeInner(xl + 1, y + 1)
       (PositionedNode(value, l, r, xl, y), xr)
     }
+
+    override lazy val depth: Int = (left.depth max right.depth) + 1
+
+    override lazy val leftDepth: Int = left.leftDepth + 1
+
+    override def layoutBinaryTree2Inner(x: Int, y: Int, d: Int): Tree[T] =
+      PositionedNode(
+        value,
+        left.layoutBinaryTree2Inner(x - Math.pow(2, d).toInt, y + 1, d - 1),
+        right.layoutBinaryTree2Inner(x + Math.pow(2, d).toInt, y + 1, d - 1),
+        x,
+        y)
   }
 
   class PositionedNode[+T](
@@ -184,4 +203,6 @@ object P55_63_BinTrees extends App {
   var tree = Tree.fromList(List('n','k','m','c','a','h','g','e','u','p','s','q'))
   println(tree.layoutBinaryTree)
 
+  var tree2 =  Node('a', Node('b', End, Node('c')), Node('d')).layoutBinaryTree2
+  println(tree2)
 }
