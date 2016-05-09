@@ -16,11 +16,16 @@ object P55_63_BinTrees extends App {
     def leafList: List[T]
     def internalList: List[T]
     def atLevel(level: Int): List[T]
+
     def layoutBinaryTree: Tree[T] = layoutBinaryTreeInner(1, 1)._1
-    protected def layoutBinaryTreeInner(x: Int, y: Int): (Tree[T], Int)
+    def layoutBinaryTreeInner(x: Int, y: Int): (Tree[T], Int)
+
+    def layoutBinaryTree2: Tree[T] = {
+
+    }
   }
 
-  case object End extends Tree[Nothing] {
+  object End extends Tree[Nothing] {
     override def toString = "."
     override def isSymmetric: Boolean = true
     override def isMirrorOf[A](t: Tree[A]): Boolean = t == End
@@ -30,10 +35,10 @@ object P55_63_BinTrees extends App {
     override def leafList: List[Nothing] = Nil
     override def internalList: List[Nothing] = Nil
     override def atLevel(level: Int): List[Nothing] = Nil
-    override protected def layoutBinaryTreeInner(x: Int, y: Int): (Tree[Nothing], Int) = (End, x)
+    override def layoutBinaryTreeInner(x: Int, y: Int): (Tree[Nothing], Int) = (End, x)
   }
 
-  case class Node[+T](value: T, left: Tree[T], right: Tree[T]) extends Tree[T] {
+  class Node[+T](val value: T, val left: Tree[T], val right: Tree[T]) extends Tree[T] {
     override def toString =
       "T(" + value.toString + " " + left.toString + " " + right.toString + ")"
 
@@ -71,24 +76,37 @@ object P55_63_BinTrees extends App {
       case n => left.atLevel(n - 1) ::: right.atLevel(n - 1)
     }
 
-    override protected def layoutBinaryTreeInner(x: Int, y: Int): (Tree[T], Int) = {
+    override def layoutBinaryTreeInner(x: Int, y: Int): (Tree[T], Int) = {
       val (l, xl) = left.layoutBinaryTreeInner(x, y + 1)
       val (r, xr) = right.layoutBinaryTreeInner(xl + 1, y + 1)
       (PositionedNode(value, l, r, xl, y), xr)
     }
   }
 
-  case class PositionedNode[+T](
+  class PositionedNode[+T](
                                  override val value: T,
                                  override val left: Tree[T],
                                  override val right: Tree[T],
-                                 x: Int,
-                                 y: Int) extends Node[T](value, left, right) {
+                                 val x: Int,
+                                 val y: Int) extends Node[T](value, left, right) {
     override def toString = "T[" + x.toString + "," + y.toString + "](" + value.toString + " " + left.toString + " " + right.toString + ")"
   }
 
+  object PositionedNode {
+    def apply[T](
+      value: T,
+      left: Tree[T],
+      right: Tree[T],
+      x: Int,
+      y: Int): PositionedNode[T] = new PositionedNode(value, left, right, x, y)
+
+    def unapply[T](arg: PositionedNode[T]): Option[(T, Tree[T], Tree[T], Int, Int)] = Some(arg.value, arg.left, arg.right, arg.x, arg.y)
+  }
+
   object Node {
-    def apply[T](value: T): Node[T] = Node(value, End, End)
+    def apply[T](value: T): Node[T] = new Node(value, End, End)
+    def apply[T](value: T, left: Tree[T], right: Tree[T]) = new Node(value, left, right)
+    def unapply[T](arg: Node[T]): Option[(T, Tree[T], Tree[T])] = Some((arg.value, arg.left, arg.right))
   }
 
   object Tree {
@@ -151,15 +169,19 @@ object P55_63_BinTrees extends App {
   }
 
 
-  println(Tree.cBalanced(5, "x"))
+//  println(Tree.cBalanced(5, "x"))
+//
+//  println(Node("a", Node("b"), Node("c")).isSymmetric)
+//
+//  println(End.addValue("a"))
+//
+//  println(Tree.fromList(List(3, 2, 1, 5, 8, 2, 10)))
+//
+//  println(Tree.hBalanced(4, "x"))
+//
+//  println(Tree.completeBinaryTree(5, "x"))
 
-  println(Node("a", Node("b"), Node("c")).isSymmetric)
+  var tree = Tree.fromList(List('n','k','m','c','a','h','g','e','u','p','s','q'))
+  println(tree.layoutBinaryTree)
 
-  println(End.addValue("a"))
-
-  println(Tree.fromList(List(3, 2, 1, 5, 8, 2, 10)))
-
-  println(Tree.hBalanced(4, "x"))
-
-  println(Tree.completeBinaryTree(5, "x"))
 }
