@@ -5,7 +5,7 @@ import java.lang.Math.log
 /**
   * Created by borisbondarenko on 03.05.16.
   */
-object P55_63_BinTrees extends App {
+object P55_65_BinTrees extends App {
 
   sealed abstract class Tree[+T] {
     def addValue[U >: T](x: U)(implicit ord: U => Ordered[U]): Tree[U]
