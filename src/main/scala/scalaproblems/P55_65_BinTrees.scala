@@ -103,11 +103,11 @@ object P55_65_BinTrees extends App {
   }
 
   class PositionedNode[+T](
-                                 override val value: T,
-                                 override val left: Tree[T],
-                                 override val right: Tree[T],
-                                 val x: Int,
-                                 val y: Int) extends Node[T](value, left, right) {
+      override val value: T,
+      override val left: Tree[T],
+      override val right: Tree[T],
+      val x: Int,
+      val y: Int) extends Node[T](value, left, right) {
     override def toString = "T[" + x.toString + "," + y.toString + "](" + value.toString + " " + left.toString + " " + right.toString + ")"
   }
 
