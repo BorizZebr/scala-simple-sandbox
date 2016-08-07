@@ -32,6 +32,36 @@ object P70_73_MultiwayTrees extends App {
       val s = str.toList
       MTree(s.head, splitChildStrings(s.tail).map(MTree(_)))
     }
+
+    def fromLispString(str: String): MTree[Char] = {
+
+      def splitChildStrings(input: List[Char]): List[String] = {
+        @tailrec
+        def loop(
+            accList: List[String],
+            accItem: List[Char],
+            rest: List[Char],
+            nesting: Int): List[String] = (nesting, rest) match {
+
+          case (0, rst) if accItem.nonEmpty =>
+            loop(accItem.reverse.mkString :: accList, Nil, rst, 0)
+          case (_, Nil) => accList
+          case (n, h :: t) => h match {
+              case '(' => loop(accList, h :: accItem, t, n + 1)
+              case ')' => loop(accList, h :: accItem, t, n - 1)
+              case ' ' if n == 0 => loop(accList, accItem, t, n)
+              case _ => loop(accList, h :: accItem, t, n)
+            }
+        }
+        loop(Nil, Nil, input, 0) reverse
+      }
+
+      if(str(0) != '(') MTree(str)
+      else {
+        val childrenStrs = splitChildStrings(str.substring(3, str.length - 1).toList)
+        MTree(str(1), childrenStrs.map(fromLispString))
+      }
+    }
   }
 
   case class MTree[+T](value: T, children: List[MTree[T]] = Nil) {
@@ -75,5 +105,5 @@ object P70_73_MultiwayTrees extends App {
   assert(treeFromString.internalPathLength == 9)
   assert(treeFromString.postorder == List('g', 'f', 'c', 'd', 'e', 'b', 'a'))
   assert(treeFromString.lispyTree == "(a (f g) c (b d e))")
-
+  assert(treeFromString == MTree.fromLispString("(a (f g) c (b d e))"))
 }
